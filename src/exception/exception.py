@@ -14,8 +14,8 @@ class CustomException(Exception):
         
 
 # Example Usage
-try:
+#try:
     logging.info("correction")
-    1 / 0 
-except Exception as e:
-    raise CustomException(e, sys.exc_info())
+#  1 / 0 
+#except Exception as e:
+#    raise CustomException(e, sys.exc_info())
