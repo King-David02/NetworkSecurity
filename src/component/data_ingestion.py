@@ -22,8 +22,9 @@ class DataIngestion:
     def retrieve_data_from_mongo(self):
         try:
             collection = self.mongo_client[self.config.database_name][self.config.collection_name]
-            df = pd.DataFrame(list(collection.find())).df.drop(columns=["_id"], errors='ignore')
+            df = pd.DataFrame(list(collection.find())).drop(columns=["_id"], errors='ignore')
             df.replace({"na": pd.NA}, inplace=True)
+            logging.info(f"Retrieved {len(df)} rows from MongoDB")
             return df
         
         except Exception as e:
@@ -39,14 +40,14 @@ class DataIngestion:
             logging.info("Data ingestion started")
             df = self.retrieve_data_from_mongo()
             logging.info("Datareceived from Mongodb")
-            self.save_to_dataframe(df)
+            self.save_to_dataframe(df, self.config.feature_store)
             logging.info("Raw file Saved")
 
-            train_size, test_size = train_test_split(df, test_size=self.config.train_test_split_ratio, random_state=42)
+            train_df, test_df = train_test_split(df, test_size=self.config.train_test_split_ratio, random_state=42)
             logging.info("train test split done")
-            self.save_to_dataframe(train_size, self.config.train_file_path)
+            self.save_to_dataframe(train_df, self.config.train_file_path)
             logging.info("train data saved")
-            self.save_to_dataframe(test_size, self.config.test_file_path)
+            self.save_to_dataframe(test_df, self.config.test_file_path)
             logging.info("test data saved")
             artifacts = DataIngestionArtifact(trained_file_path=self.config.train_file_path, test_file_path=self.config.test_file_path)
             logging.info("Data ingestion done")

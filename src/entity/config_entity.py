@@ -3,7 +3,7 @@ import os
 from src.constant import training_pipeline as tp
 
 class TrainingPipelineConfig:
-    def __init__(self, timestamp= datetime().now()):
+    def __init__(self, timestamp= datetime.now()):
         timestamp = timestamp.strftime("%d_%m_%Y_%H-%M-%S")
         self.pipeline_name = tp.PIPELINE_NAME
         self.artifacts_dir = os.path.join(tp.ARTIFACT_DIR, timestamp)
