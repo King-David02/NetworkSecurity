@@ -20,3 +20,15 @@ class DataIngestionConfig:
         self.train_test_split_ratio = tp.DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO
         self.collection_name = tp.DATA_INGESTION_COLLECTION_NAME
         self.database_name = tp.DATA_INGESTION_DATABASE_NAME
+
+
+class DataValidationConfig:
+    def __init__(self, validation_config: TrainingPipelineConfig):
+        self.validation_base_dir = os.path.join(validation_config.artifacts_dir, tp.DATA_VALIDATION_DIR_NAME)
+        self.valid_dir = os.path.join(self.validation_base_dir, tp.DATA_VALIDATION_VALID_DIR)
+        self.invalid_dir = os.path.join(self.validation_base_dir, tp.DATA_VALIDATION_INVALID_DIR)
+        self.drift_report_dir = os.path.join(self.validation_base_dir, tp.DATA_VALIDATION_DRIFT_REPORT_DIR, tp.DATA_VALIDATION_DRIFT_REPORT_FILE_NAME)
+        self.valid_train_file_path= os.path.join(self.valid_dir, tp.TRAIN_FILE_NAME)
+        self.valid_test_file_path = os.path.join(self.valid_dir, tp.TEST_FILE_NAME)
+        self.invalid_train_file_path= os.path.join(self.invalid_dir, tp.TRAIN_FILE_NAME)
+        self.invalid_test_file_path = os.path.join(self.invalid_dir, tp.TEST_FILE_NAME)
