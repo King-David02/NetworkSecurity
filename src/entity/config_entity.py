@@ -42,3 +42,9 @@ class DataTransformationConfig:
         self.transformed_object = os.path.join(self.transformation_base_dir, tp.DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR, tp.PREPROCESSING_OBJECT_FILE_NAME)
         self.transformed_train_file_path = os.path.join(self.transformed_data, tp.DATA_TRANSFORMATION_TRAIN_FILE_PATH)
         self.transformed_test_file_path = os.path.join(self.transformed_data, tp.DATA_TRANSFORMATION_TEST_FILE_PATH)
+
+
+class ModelTrainerConfig:
+    def __init__(self, trainer_config: TrainingPipelineConfig):
+        self.trainer_base_dir = os.path.join(trainer_config.artifacts_dir, tp.MODEL_TRAINER_DIR_NAME)
+        self.saved_model_path = os.path.join(self.trainer_base_dir, tp.MODEL_TRAINER_TRAINED_MODEL_NAME)
