@@ -29,7 +29,7 @@ def write_yaml_file(file_path: str, content: object, replace: bool = False) -> N
     
 
 
-    def save_numpy_array_data(file_path: str, array: np.array):
+def save_numpy_array_data(file_path: str, array: np.array):
         """
         Save numpy array data to file
         file_path: str location of file to save
@@ -44,7 +44,7 @@ def write_yaml_file(file_path: str, content: object, replace: bool = False) -> N
             raise CustomException(e, sys.exc_info())
         
 
-    def save_object(file_path: str, obj: object) -> None:
+def save_object(file_path: str, obj: object) -> None:
         try:
             logging.info("Entered the save_object method of MainUtils class")
             os.makedirs(os.path.dirname(file_path), exist_ok=True)
@@ -52,4 +52,4 @@ def write_yaml_file(file_path: str, content: object, replace: bool = False) -> N
                 pickle.dump(obj, file_obj)
             logging.info("Exited the save_object method of MainUtils class")
         except Exception as e:
-            raise CustomException(e, sys.exc_info()) 
+            raise CustomException(e, sys.exc_info())

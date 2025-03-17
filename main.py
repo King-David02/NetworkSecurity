@@ -1,8 +1,9 @@
 from src.logging.logger import logging
 from src.exception.exception import CustomException
-from src.entity.config_entity import TrainingPipelineConfig, DataIngestionConfig, DataValidationConfig
+from src.entity.config_entity import TrainingPipelineConfig, DataIngestionConfig, DataValidationConfig, DataTransformationConfig
 from src.component.data_ingestion import DataIngestion
 from src.component.data_validation import DataValidation
+from src.component.data_transformation import DataTransformation
 import sys
 
 if __name__ == "__main__":
@@ -20,7 +21,11 @@ if __name__ == "__main__":
         data_validation_artifacts = data_validation.initiate_data_validation()
         logging.info(f"{data_validation_artifacts}")
         logging.info("Data_validation completed")
-
+        logging.info("Data Transformation begining")
+        data_transformation_config = DataTransformationConfig(trainingpipeline)
+        data_transformation = DataTransformation(data_transformation_config, data_validation_artifacts)
+        data_transformation_artifacts = data_transformation.initiate_data_transformation()
+        logging.info("Data Transformation complete")
 
 
     except Exception as e:
