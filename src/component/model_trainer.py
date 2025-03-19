@@ -60,6 +60,7 @@ class ModelTrainer:
                 mlflow.log_metric("test_recall", test_metrics.recall_score)
 
                 save_object(self.config.saved_model_path, best_model)
+                save_object('final_objects/model.pkl', best_model)
                 artifacts = ModelTrainerArtifact(
                     trained_model_file_path=self.config.saved_model_path,
                     train_metric_artifact=train_metrics,

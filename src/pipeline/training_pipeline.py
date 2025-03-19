@@ -58,7 +58,7 @@ class TrainingPipeline:
         try:
             model_trainer_config = ModelTrainerConfig(self.training_pipeline_config)
             model_trainer = ModelTrainer(config=model_trainer_config, artifacts=data_validation_artifacts)
-            model_trainer_artifacts = model_trainer.initiate_data_trainer()
+            model_trainer_artifacts = model_trainer.initiate_model_trainer()
             return model_trainer_artifacts
         
         except Exception as e:
